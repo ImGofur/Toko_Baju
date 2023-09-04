@@ -1,7 +1,7 @@
 <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Data User</h3>
+                <h3 class="card-title">Data Kategori</h3>
 
                 <div class="card-tools">
                   <button data-toggle="modal" data-target="#add" type="button" class="btn btn-primary btn-sm">
@@ -26,33 +26,27 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Level</th>
+                        <th>Nama Kategori</th>
+                        <th>Stok</th>
+                        <th>Warna</th>
+                        <th>Size</th>
                         <th>Action</th>     
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
-                     foreach ($user as $key => $value ){?>
+                     foreach ($kategori as $key => $value ){?>
 
                     <tr>
                         <td class="text-center"><?= $no++;?></td>
-                        <td><?= $value->nama?></td>
-                        <td class="text-center"><?= $value->username?></td>
-                        <td class="text-center"><?= $value->password?></td>
-                        <td class="text-center"><?php
-                        if ($value->level==1){
-                            echo '<span class="badge bg-primary">Admin</span>';
-                        }else
-                        {
-                            echo '<span class="badge bg-success">User</span>';
-                        }
-                        ?></td>
+                        <td><?= $value->nama_kategori?></td>
+                        <td><?= $value->stok?></td>
+                        <td><?= $value->warna?></td>
+                        <td><?= $value->size?></td>
+                        
                         <td class="text-center">
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$value->id_user ?>"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$value->id_user ?>"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$value->id_kategori ?>"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$value->id_kategori ?>"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
 
@@ -66,11 +60,13 @@
           </div>
 
 
+
+
           <div class="modal fade" id="add">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Add User</h4>
+              <h4 class="modal-title">Add Kategori</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -78,27 +74,25 @@
             <div class="modal-body">
              
             <?php
-                echo form_open('user/add');
+                echo form_open('kategori/add');
             ?>
                    <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" name="nama" class="form-control" placeholder="Nama" required>
+                    <label>Nama Kategori</label>
+                    <input type="text" name="nama_kategori" class="form-control" placeholder="Nama Kategori" required>
                   </div>
                   <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    <label>Stok</label>
+                    <input type="text" name="stok" class="form-control" placeholder="Stok" required>
                   </div>
                   <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <label>Warna</label>
+                    <input type="text" name="warna" class="form-control" placeholder="Warna" required>
                   </div>
                   <div class="form-group">
-                    <label>Level User</label>
-                    <select name="level" class="form-control" >
-                        <option value="1" selected>Admin</option>
-                        <option value="2">User</option>
-                     </select>
+                    <label>Size</label>
+                    <input type="text" name="size" class="form-control" placeholder="Size" required>
                   </div>
+                  
 
             </div>
             <div class="modal-footer justify-content-between">
@@ -118,10 +112,9 @@
 
 
 
-
-    <!--modal-edit-->
-    <?php foreach ($user as $key => $value ){?>
-      <div class="modal fade" id="edit<?=$value->id_user ?>">
+      <!--modal-edit-->
+    <?php foreach ($kategori as $key => $value ){?>
+      <div class="modal fade" id="edit<?=$value->id_kategori ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -133,28 +126,26 @@
             <div class="modal-body">
              
             <?php
-                echo form_open('user/edit/' . $value->id_user);
+                echo form_open('kategori/edit/' . $value->id_kategori);
             ?>
 
                   <div class="form-group">
-                    <label>Nama </label>
-                    <input type="text" name="nama" value="<?=$value->nama ?>" class="form-control" placeholder="Nama" required>
+                    <label>Nama  Kategori</label>
+                    <input type="text" name="nama_kategori" value="<?=$value->nama_kategori ?>" class="form-control" placeholder="Nama Kategori" required>
                   </div>
                   <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" value="<?=$value->username ?>"  class="form-control" placeholder="Username" required>
+                    <label>Stok</label>
+                    <input type="text" name="stok" value="<?=$value->stok ?>"  class="form-control" placeholder="stok" required>
                   </div>
                   <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" name="password" value="<?=$value->password ?>"  class="form-control" placeholder="Password" required>
+                    <label>Warna</label>
+                    <input type="text" name="warna" value="<?=$value->warna ?>"  class="form-control" placeholder="warna" required>
                   </div>
                   <div class="form-group">
-                    <label>Level User</label>
-                    <select name="level" class="form-control" >
-                        <option value="1" <?php if($value->level==1){echo 'selected';}?>>Admin</option>
-                        <option value="2"  <?php if($value->level==2){echo 'selected';}?>>User</option>
-                     </select>
+                    <label>Size</label>
+                    <input type="text" name="size" value="<?=$value->size ?>"  class="form-control" placeholder="size" required>
                   </div>
+                  
 
             </div>
             <div class="modal-footer justify-content-between">
@@ -175,14 +166,13 @@
 
 
 
-
-<!--modal-delete-->
-<?php foreach ($user as $key => $value ){?>
-      <div class="modal fade" id="delete<?=$value->id_user ?>">
+      <!--modal-delete-->
+<?php foreach ($kategori as $key => $value ){?>
+      <div class="modal fade" id="delete<?=$value->id_kategori ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Delete <?= $value->nama?></h4>
+              <h4 class="modal-title">Delete <?= $value->nama_kategori?></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -194,7 +184,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <a href="<?= base_url('user/delete/' . $value->id_user) ?>"class="btn btn-danger">Delete</a>
+              <a href="<?= base_url('kategori/delete/' . $value->id_kategori) ?>"class="btn btn-danger">Delete</a>
              
               
             </div>
@@ -208,3 +198,4 @@
       </div>
       <!-- /.modal -->
 <?php }?>
+
